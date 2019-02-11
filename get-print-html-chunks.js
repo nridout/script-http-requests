@@ -1,8 +1,3 @@
-// This function should console.log each chunk of data as it is received, concatenated with a newline character('\n') so you can visualize each chunk.
-// Remember in this and each subsequent Step - you will always need to invoke(call) the function you wrote.
-
-
-
 // Utilizes the https library to GET a given URL
 function getAndPrintHTMLChunks () {
 
@@ -14,6 +9,8 @@ function getAndPrintHTMLChunks () {
     path: '/http-examples/step1.html'
   };
 
+  // console.logs each chunk of data as it is received,
+  // concatenated with a newline character ('\n')
   https.get(requestOptions, function (response) {
 
     // set encoding of received data to UTF-8
