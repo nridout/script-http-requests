@@ -1,8 +1,9 @@
-// function that accepts a paramater, options
+// function that accepts two paramaters, options and print
 // Utilizes the https library to GET a given URL
-// buffers the data chunks and console logs the full set of data
+// buffers the data chunks and console logs the full set of data using callback function printHTML
+function getHTML(options, print) {
 
-function getAndPrintHTML(options) {
+  var https = require('https');
 
   // console.logs each chunk of data as it is received,
   // concatenated with a newline character ('\n')
@@ -11,27 +12,33 @@ function getAndPrintHTML(options) {
     // set encoding of received data to UTF-8
     response.setEncoding('utf8');
 
+    // empty variable for the full data set
     var fullData = "";
 
     // the callback is invoked when a `data` chunk is received
+    // adds data chunks to fullData
     response.on('data', function (data) {
       fullData += (data + "\n");
     });
 
+    // once everything is received, pass the fullData through the printHTML function
     response.on('end', function () {
-      console.log(fullData);
+      print(fullData);
     });
 
   });
 
 }
 
-var https = require('https');
+// prints the stream
+function printHTML(html) {
+  console.log(html);
+}
 
+// defines a where the stream is coming from
 var requestOptions = {
   host: 'sytantris.github.io',
   path: '/http-examples/step2.html'
 };
 
-
-console.log(getAndPrintHTML(requestOptions));
+console.log(getHTML(requestOptions, printHTML));
