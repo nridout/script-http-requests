@@ -34,4 +34,4 @@ var requestOptions = {
 };
 
 
-console.log(getAndPrintHTML(requestOptions));
+getAndPrintHTML(requestOptions);

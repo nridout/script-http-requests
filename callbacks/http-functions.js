@@ -1,18 +1,7 @@
-// This function should use a buffering technique to append each chunk of data
-// to a variable as it is received, and then console.log the data
-// once all of the data has been received.
 
-
-function getAndPrintHTML() {
+module.exports = function getHTML(requestOptions, callback) {
 
   var https = require('https');
-
-  var requestOptions = {
-    host: 'sytantris.github.io',
-    path: '/http-examples/step2.html'
-  };
-
-  var fullData = "";
 
   // console.logs each chunk of data as it is received,
   // concatenated with a newline character ('\n')
@@ -21,17 +10,21 @@ function getAndPrintHTML() {
     // set encoding of received data to UTF-8
     response.setEncoding('utf8');
 
+    // empty variable for the full data set
+    var fullData = "";
+
     // the callback is invoked when a `data` chunk is received
+    // adds data chunks to fullData
     response.on('data', function (data) {
       fullData += (data + "\n");
     });
 
+    // once everything is received, pass the fullData through the printHTML function
     response.on('end', function () {
-      console.log(fullData);
+      callback(fullData);
     });
 
   });
 
-}
 
-getAndPrintHTML();
+};
