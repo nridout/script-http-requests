@@ -1,7 +1,5 @@
-// function that accepts two paramaters, options and print
-// Utilizes the https library to GET a given URL
-// buffers the data chunks and console logs the full set of data using callback function printHTML
-function getHTML(requestOptions, callback) {
+
+module.exports = function getHTML(requestOptions, callback) {
 
   var https = require('https');
 
@@ -28,17 +26,5 @@ function getHTML(requestOptions, callback) {
 
   });
 
-}
 
-// prints the stream
-function printHTML(html) {
-  console.log(html);
-}
-
-// defines a where the stream is coming from
-var requestOptions = {
-  host: 'sytantris.github.io',
-  path: '/http-examples/step3.html'
 };
-
-console.log(getHTML(requestOptions, printHTML));
